@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Boards from '@/components/Boards'
+import Tasks from '@/components/Tasks'
 export default {
   name: 'App',
   components: {
-    Boards
+    Tasks
   }
 }
 </script>
