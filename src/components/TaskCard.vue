@@ -2,7 +2,7 @@
   <div>
     <div class="card border-dark mb-3" style="max-width: 14rem; margin: auto;">
       <div class="card-header"> <b>{{ task.title }}</b></div>
-      <div class="card-body" style="text-align: left;">
+      <div class="card-body" style="text-align: left; margin: 0%">
         <p> Point : {{ task.point }} </p>
         <p> assigned to : {{ task.assignedto }} </p>
         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Show more</button>
@@ -32,7 +32,7 @@
             </ul>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="remove()">Delete</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="remove">Delete</button>
             <button type="button" class="btn btn-info">Move</button>
           </div>
         </div>
@@ -43,19 +43,14 @@
 
 <script>
 export default {
-  props: ['task'],
-  data () {
-    return {
-      taskTitle: '',
-      taskDesc: '',
-      point: 0,
-      assignedto: ''
+  props: ['task', 'db'],
+  methods: {
+    remove () {
+      console.log(this.task)
+      this.task.key = this.task['.key']
+      this.task.db = this.db
+      this.$emit('remove-task', this.task)
     }
   }
-  // methods: {
-  //   showmore () {
-  //     this.modal = true
-  //   }
-  // }
 }
 </script>

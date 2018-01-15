@@ -63,28 +63,28 @@
       <div class="card border-primary mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
         <div class="card-header text-primary"><h4> Back-Log</h4></div>
         <div class="card-body">
-          <TaskCard v-for="(task, index) in backlog" :key="index" :task="task"/>
+          <TaskCard v-for="(task, index) in backlog" :key="index" :task="task" db="backlog" @remove-task="deleteTask"/>
         </div>
       </div>
       <!-- todo -->
       <div class="card border-warning mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
         <div class="card-header text-warning"><h4>To-Do</h4></div>
         <div class="card-body">
-         <TaskCard v-for="(task, index) in todo" :key="index" :task="task"/>
+         <TaskCard v-for="(task, index) in todo" :key="index" :task="task" db="todo" @remove-task="deleteTask"/>
         </div>
       </div>
       <!-- doing -->
       <div class="card border-info mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
         <div class="card-header text-info"><h4>Doing</h4></div>
         <div class="card-body">
-          <TaskCard v-for="(task, index) in doing" :key="index" :task="task"/>
+          <TaskCard v-for="(task, index) in doing" :key="index" :task="task" db="doing" @remove-task="deleteTask"/>
         </div>
       </div>
       <!-- done -->
       <div class="card border-success mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
         <div class="card-header text-success"><h4>Done</h4></div>
         <div class="card-body">
-          <TaskCard v-for="(task, index) in done" :key="index" :task="task"/>
+          <TaskCard v-for="(task, index) in done" :key="index" :task="task" db="done" @remove-task="deleteTask"/>
         </div>
       </div>
     </div>
@@ -122,16 +122,37 @@ export default {
     },
     submitTask () {
       backlog.push({
-        'title': this.taskTitle,
-        'description': this.taskDesc,
-        'point': this.point,
-        'assignedto': this.assignedto
+        title: this.taskTitle,
+        description: this.taskDesc,
+        point: this.point,
+        assignedto: this.assignedto
       })
       this.taskTitle = ''
       this.taskDesc = ''
       this.point = 0
       this.assignedto = ''
       this.isModal = false
+    },
+    deleteTask (task) {
+      console.log(task)
+      switch (task.db) {
+        case 'backlog' : {
+          backlog.child(task.key).remove()
+          break
+        }
+        case 'todo' : {
+          todo.child(task.key).remove()
+          break
+        }
+        case 'doing' : {
+          doing.child(task.key).remove()
+          break
+        }
+        case 'done' : {
+          done.child(task.key).remove()
+          break
+        }
+      }
     }
   }
 }
