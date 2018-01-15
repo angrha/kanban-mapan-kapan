@@ -1,17 +1,17 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" style="margin-left: 5%;" href="#">Kanban Board</a>
+      <a class="navbar-brand" style="margin-left: 2%;" href="#">Kanban Board</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div style="margin-left: 70%;">
+      <div style="margin-left: 78%;">
           <button type="button" @click="modal" class="btn btn-secondary my-2 my-sm-0" data-toggle="modal" data-target="#myModal">New Task</button>
       </div>
     </nav>
 
      <!-- modal -->
-    <div v-if="isModal" class="row" >
+    <div v-if="isModal">
         <legend> New Task</legend>
       <div  class="col-md-6 col-md-offset-4" style="margin: auto;">
         <form class="form-horizontal" role="form">
@@ -46,8 +46,8 @@
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <div class="pull-right" style="float: right;">
-                  <button type="submit" class="btn btn-default" @click="cancel">Cancel</button>
-                  <button @click="submitTask" type="submit" class="btn btn-primary">Save</button>
+                  <button type="submit" class="btn btn-primary" @click="cancel">Cancel</button>
+                  <button @click="submitTask" type="submit" class="btn btn-success">Save</button>
                 </div>
               </div>
             </div>
@@ -58,7 +58,36 @@
     </div><!-- /.row -->
 
     <!-- cards -->
-    <TaskCard style="margin: 3%;"/>
+    <div class="row" style="margin: 1.5%;">
+      <!-- back-log -->
+      <div class="card border-primary mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
+        <div class="card-header text-primary"><h4> Back-Log</h4></div>
+        <div class="card-body">
+          <TaskCard/>
+        </div>
+      </div>
+      <!-- todo -->
+      <div class="card border-warning mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
+        <div class="card-header text-warning"><h4>To-Do</h4></div>
+        <div class="card-body">
+         <TaskCard/>
+        </div>
+      </div>
+      <!-- doing -->
+      <div class="card border-info mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
+        <div class="card-header text-info"><h4>Doing</h4></div>
+        <div class="card-body">
+          <TaskCard/>
+        </div>
+      </div>
+      <!-- done -->
+      <div class="card border-success mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
+        <div class="card-header text-success"><h4>Done</h4></div>
+        <div class="card-body">
+          <TaskCard/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -86,7 +115,7 @@ export default {
   },
   methods: {
     modal () {
-      this.isModal = true
+      this.isModal = !this.isModal
     },
     cancel () {
       this.isModal = false
