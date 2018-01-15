@@ -1,12 +1,12 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" style="margin-left: 2%;" href="#">Kanban Board</a>
+      <a class="navbar-brand" style="margin-left: 2%; font-size:22px; padding: 0%;" href="#">Kanban Board</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div style="margin-left: 78%;">
-          <button type="button" @click="modal" class="btn btn-secondary my-2 my-sm-0" data-toggle="modal" data-target="#myModal">New Task</button>
+      <div style="margin-left: 75%;">
+          <button type="button" @click="modal" class="btn btn-secondary my-2 my-sm-0">New Task</button>
       </div>
     </nav>
 
@@ -63,28 +63,28 @@
       <div class="card border-primary mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
         <div class="card-header text-primary"><h4> Back-Log</h4></div>
         <div class="card-body">
-          <TaskCard/>
+          <TaskCard v-for="(task, index) in backlog" :key="index" :task="task"/>
         </div>
       </div>
       <!-- todo -->
       <div class="card border-warning mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
         <div class="card-header text-warning"><h4>To-Do</h4></div>
         <div class="card-body">
-         <TaskCard/>
+         <TaskCard v-for="(task, index) in todo" :key="index" :task="task"/>
         </div>
       </div>
       <!-- doing -->
       <div class="card border-info mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
         <div class="card-header text-info"><h4>Doing</h4></div>
         <div class="card-body">
-          <TaskCard/>
+          <TaskCard v-for="(task, index) in doing" :key="index" :task="task"/>
         </div>
       </div>
       <!-- done -->
       <div class="card border-success mb-3 col-md-3" style="max-width: 18rem; margin: 1%;">
         <div class="card-header text-success"><h4>Done</h4></div>
         <div class="card-body">
-          <TaskCard/>
+          <TaskCard v-for="(task, index) in done" :key="index" :task="task"/>
         </div>
       </div>
     </div>
