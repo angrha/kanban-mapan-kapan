@@ -42,6 +42,7 @@ export default {
       this.task.key = this.task['.key']
       this.task.db = this.db
       this.$emit('detail-task', this.task)
+      console.log('ini dari taskcard', this.task['.key'])
     },
     nextMove (task) {
       switch (this.db) {

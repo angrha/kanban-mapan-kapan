@@ -121,6 +121,7 @@ export default {
       this.isModal = false
     },
     detail (payload) {
+      console.log('iniii di tasks doang middle', payload)
       this.$emit('detail', payload)
     },
     submitTask () {

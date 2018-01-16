@@ -5,7 +5,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"> Detail Task {{ task }}</h5>
+          <h5 class="modal-title"> Detail Task {{ task.title }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -24,7 +24,7 @@
           </ul>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" @click="remove">Delete</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
           <button type="button" class="btn btn-info">prev</button>
           <button type="button" class="btn btn-info">next</button>
         </div>
