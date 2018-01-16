@@ -39,7 +39,7 @@
                   <!-- Text input-->
             <div class="form-group">
               <div class="col-sm-10">
-                <input v-model="assignedto" type="text" placeholder="Assigned to" class="form-control">
+                <input v-model="assigned" type="text" placeholder="Assigned to" class="form-control">
               </div>
             </div>
 
@@ -107,7 +107,7 @@ export default {
       taskTitle: '',
       taskDesc: '',
       point: 0,
-      assignedto: ''
+      assigned: ''
     }
   },
   components: {
@@ -129,34 +129,13 @@ export default {
         title: this.taskTitle,
         description: this.taskDesc,
         point: this.point,
-        assignedto: this.assignedto
+        assigned: this.assigned
       })
       this.taskTitle = ''
       this.taskDesc = ''
       this.point = 0
-      this.assignedto = ''
+      this.assigned = ''
       this.isModal = false
-    },
-    deleteTask (task) {
-      console.log(task)
-      switch (task.db) {
-        case 'backlog' : {
-          backlog.child(task.key).remove()
-          break
-        }
-        case 'todo' : {
-          todo.child(task.key).remove()
-          break
-        }
-        case 'doing' : {
-          doing.child(task.key).remove()
-          break
-        }
-        case 'done' : {
-          done.child(task.key).remove()
-          break
-        }
-      }
     }
   }
 }

@@ -1,11 +1,10 @@
 <template>
 <!-- modal -->
-<!-- unUse -->
   <div class="modal" id="myModal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"> Detail Task {{ title }}</h5>
+          <h5 class="modal-title"> Detail Task {{ task.title }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -13,19 +12,19 @@
         <div class="modal-body">
           <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              Description : {{ description }}
+              Description : {{ task.description }}
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              Point : {{ point }}
+              Point : {{ task.point }}
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              Assigned to : {{ assignedto }}
+              Assigned to : {{ task.assigned }}
             </li>
           </ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteTask(task)">Delete</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal" @click="preMove(task)">prev</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal" @click="prevMove(task)">prev</button>
           <button type="button" class="btn btn-info" data-dismiss="modal" @click="nextMove(task)">next</button>
         </div>
       </div>
@@ -39,10 +38,10 @@ export default {
   props: ['task'],
   data () {
     return {
-      title: this.task.title,
-      description: this.task.description,
-      point: this.task.point,
-      assignedto: this.task.assignedto
+      title: '',
+      description: '',
+      point: '',
+      assigned: this.task.assigned
     }
   },
   methods: {
@@ -68,8 +67,9 @@ export default {
       }
     },
     nextMove (task) {
+      console.log('ini title', task)
       let objDetail = {
-        assigned: task.assignedto,
+        assigned: task.assigned,
         title: task.title,
         point: task.point,
         description: task.description
@@ -89,7 +89,7 @@ export default {
           break
         }
         case 'done' : {
-          done.push(objDetail)
+          alert('already done')
           break
         }
       }
@@ -114,17 +114,13 @@ export default {
     },
     prevMove (task) {
       let objDetail = {
-        assigned: task.assignedto,
+        assigned: task.assigned,
         title: task.title,
         point: task.point,
         description: task.description
       }
 
       switch (task.db) {
-        case 'backlog' : {
-          backlog.push(objDetail)
-          break
-        }
         case 'todo' : {
           backlog.push(objDetail)
           break
@@ -134,15 +130,11 @@ export default {
           break
         }
         case 'done' : {
-          todo.push(objDetail)
+          doing.push(objDetail)
           break
         }
       }
       switch (task.db) {
-        case 'backlog' : {
-          backlog.child(task.key).remove()
-          break
-        }
         case 'todo' : {
           todo.child(task.key).remove()
           break
