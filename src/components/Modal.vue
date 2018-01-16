@@ -24,7 +24,7 @@
           </ul>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteTask(task)">Delete</button>
           <button type="button" class="btn btn-info">prev</button>
           <button type="button" class="btn btn-info">next</button>
         </div>
@@ -34,8 +34,32 @@
 </template>
 
 <script>
+import {backlog, todo, doing, done} from '@/firebase'
 export default {
-  props: ['task']
+  props: ['task'],
+  methods: {
+    deleteTask (task) {
+      console.log(task)
+      switch (task.db) {
+        case 'backlog' : {
+          backlog.child(task.key).remove()
+          break
+        }
+        case 'todo' : {
+          todo.child(task.key).remove()
+          break
+        }
+        case 'doing' : {
+          doing.child(task.key).remove()
+          break
+        }
+        case 'done' : {
+          done.child(task.key).remove()
+          break
+        }
+      }
+    }
+  }
 }
 </script>
 
