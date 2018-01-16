@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <router-view/>
+    <Modal/>
   </div>
 </template>
 
 <script>
 import Tasks from '@/components/Tasks'
+import Modal from '@/components/Modal'
 export default {
   name: 'App',
   components: {
-    Tasks
+    Tasks,
+    Modal
   }
 }
 </script>

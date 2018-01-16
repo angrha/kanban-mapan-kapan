@@ -9,36 +9,6 @@
       </div>
     </div>
     <!-- modal -->
-    <div class="modal" id="myModal" >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title"> Detail Task {{ titleDetail }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Description : {{ descDetail }}
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Point : {{ pointDetail }}
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Assigned to : {{ assignDetail }}
-              </li>
-            </ul>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="removeTask">Delete</button>
-            <button type="button" class="btn btn-info">prev</button>
-            <button type="button" class="btn btn-info">next</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -63,12 +33,15 @@ export default {
       this.$emit('remove-task', this.task)
     },
     detail () {
-      this.titleDetail = this.task.title
-      this.descDetail = this.task.description
-      this.pointDetail = this.task.point
-      this.assignDetail = this.task.assignedto
-      console.log(this.titleDetail)
-      console.log(this.task['.key'])
+      // this.titleDetail = this.task.title
+      // this.descDetail = this.task.description
+      // this.pointDetail = this.task.point
+      // this.assignDetail = this.task.assignedto
+      // console.log(this.titleDetail)
+      // console.log(this.task['.key'])
+      this.task.key = this.task['.key']
+      this.task.db = this.db
+      this.$emit('detail-task', this.task)
     },
     nextMove (task) {
       switch (this.db) {
