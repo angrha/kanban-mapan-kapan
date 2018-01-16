@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <Modal/>
+    <Modal @detail="detailTask" :task="task"/>
   </div>
 </template>
 
@@ -13,6 +13,17 @@ export default {
   components: {
     Tasks,
     Modal
+  },
+  data () {
+    return {
+      task: null
+    }
+  },
+  methods: {
+    detailTask (payload) {
+      console.log(payload.key)
+      this.task = payload
+    }
   }
 }
 </script>
