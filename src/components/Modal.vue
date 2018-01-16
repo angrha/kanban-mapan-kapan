@@ -36,17 +36,8 @@
 import {backlog, todo, doing, done} from '@/firebase'
 export default {
   props: ['task'],
-  data () {
-    return {
-      title: '',
-      description: '',
-      point: '',
-      assigned: this.task.assigned
-    }
-  },
   methods: {
     deleteTask (task) {
-      console.log(task)
       switch (task.db) {
         case 'backlog' : {
           backlog.child(task.key).remove()
@@ -67,7 +58,6 @@ export default {
       }
     },
     nextMove (task) {
-      console.log('ini title', task)
       let objDetail = {
         assigned: task.assigned,
         title: task.title,
@@ -104,10 +94,6 @@ export default {
         }
         case 'doing' : {
           doing.child(task.key).remove()
-          break
-        }
-        case 'done' : {
-          done.child(task.key).remove()
           break
         }
       }

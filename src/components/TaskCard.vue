@@ -13,18 +13,8 @@
 </template>
 
 <script>
-// import {todo, doing, done} from '@/firebase'
-// import {db} from '@/firebase'
 export default {
   props: ['task', 'db', 'index'],
-  data () {
-    return {
-      titleDetail: '',
-      descDetail: '',
-      pointDetail: 0,
-      assignDetail: ''
-    }
-  },
   methods: {
     removeTask () {
       console.log(this.task)
@@ -33,12 +23,6 @@ export default {
       this.$emit('remove-task', this.task)
     },
     detail () {
-      // this.titleDetail = this.task.title
-      // this.descDetail = this.task.description
-      // this.pointDetail = this.task.point
-      // this.assignDetail = this.task.assigned
-      // console.log(this.titleDetail)
-      // console.log(this.task['.key'])
       this.task.key = this.task['.key']
       this.task.db = this.db
       this.$emit('detail-task', this.task)
